@@ -5,8 +5,14 @@ name = "pypi"
 
 [packages]
 flask = "*"
-uwsgi = "*"
 pymysql = "*"
+cerberus = "*"
+sqlalchemy = "*"
+flask-sqlalchemy = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+flask-cors = "*"
+redux-localstorage = "*"
 
 [dev-packages]
 

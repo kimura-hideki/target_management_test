@@ -8,7 +8,7 @@ const src = path.resolve(__dirname, "app/frontend");
 const dist = path.resolve(__dirname, "app/templates/dist");
 
 module.exports = {
-  entry: ['@babel/polyfill', src + '/app.js'],
+  entry: ['@babel/polyfill', src + '/App.js'],
   output: {
     path: dist,
     filename: "bundle.js",

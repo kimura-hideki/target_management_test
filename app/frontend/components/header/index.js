@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import store from "../stores/";
-import MenuFrom from "./MenuForm";
-import Header from "../header/";
+import HeaderContents from "./HeaderContents";
 
-const Menu = () => {
+const Header = () => {
   useEffect(() => {
-    console.log("menu");
+    console.log("test");
   },[]);
 
   return (
     <Provider store={store}>
-      <Header />
-      <MenuFrom />
+        <HeaderContents />
     </Provider>
   );
 }
 
-export default Menu;
+export default Header;
