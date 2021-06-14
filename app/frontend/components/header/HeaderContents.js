@@ -8,31 +8,37 @@ import { useDispatch } from "react-redux";
 
 
 const HeaderContents = () => {
-    const name = useSelector(state => state.user.name);
-    const history = useHistory();
+  const name = useSelector(state => state.user.name);
+  console.log("state");
+  console.log(name);
+  const history = useHistory();
+  if( name == "name" ){
     const dispatch2 = useDispatch();
-
-    const logout = async () => {
-      // 保存したユーザー情報を削除してログイン画面に遷移
-      dispatch2(clearAll());
-      history.push('/');
-    }
-    return (
+    dispatch2(clearAll());
+    history.push('/');
+  }
+  
+  const logout = async () => {
+    // 保存したユーザー情報を削除してログイン画面に遷移
+    dispatch2(clearAll());
+    history.push('/');
+  }
+  return (
     <main>
-        <h1>目標管理ネタ</h1>
-        {name != "name" && <h2>{name} 様</h2>}
-        {name != "name" && 
-        <Button
-          size="small"
-          type="button" 
-          variant="contained" 
-          color="secondary"
-          onClick={() => logout()}
-          >
-            ログアウト
-          </Button>}
-      </main>
-    )
+      <h1>目標管理ネタ</h1>
+      {name != "name" && <h2>{name} 様</h2>}
+      {name != "name" && 
+      <Button
+        size="small"
+        type="button" 
+        variant="contained" 
+        color="secondary"
+        onClick={() => logout()}
+        >
+          ログアウト
+        </Button>}
+    </main>
+  )
 }
 // React.memo(小技系)
 // 例えば親コンポーネントが頻繁に更新される場合に使用する

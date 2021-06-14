@@ -6,9 +6,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { useSelector } from "react-redux";
-import { clearAll } from "../stores/user";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
@@ -27,15 +24,14 @@ const useStyles = makeStyles({
 });
 
 const MenuForm = () => {
-  const history = useHistory();
   const classes = useStyles();
-  const dispatch2 = useDispatch();
-  const name = useSelector(state => state.user.name);
-  if( name == "name" ){
-    dispatch2(clearAll());
-    history.push('/');
-  }
-
+  const history = useHistory();
+  const salesGo = () => {
+    history.push('/sales');
+  };
+  const itemsGo = () => {
+    history.push('/items');
+  };
     return (
       <Card className={classes.root} variant="outlined">
         <CardContent>
@@ -52,7 +48,7 @@ const MenuForm = () => {
               variant="contained" 
               color="secondary"
               className={classes.button}
-              href="/items"
+              onClick={() => itemsGo()}
               >
                 アイテム一覧
               </Button>
@@ -64,7 +60,7 @@ const MenuForm = () => {
               variant="contained" 
               color="secondary"
               className={classes.button}
-              href="/sales"
+              onClick={() => salesGo()}
               >
                 販売画面
               </Button>

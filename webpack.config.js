@@ -15,14 +15,14 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /(node_modules|dist)/,
-        loader: "eslint-loader",
-        options: {
-          fix: true
-        }
-      },
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   exclude: /(node_modules|dist)/,
+      //   loader: "eslint-loader",
+      //   options: {
+      //     fix: true
+      //   }
+      // },
       {
         test: /\.(js|jsx)$/,
         use: [{

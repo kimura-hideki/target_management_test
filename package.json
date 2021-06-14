@@ -55,6 +55,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "cerberus": "^1.0.4",
+    "file-loader": "^6.2.0",
     "prop-types": "^15.7.2",
     "redux-localstorage": "^0.4.1"
   },

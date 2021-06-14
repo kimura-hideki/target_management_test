@@ -5,7 +5,7 @@ import HeaderContents from "./HeaderContents";
 
 const Header = () => {
   useEffect(() => {
-    console.log("test");
+    console.log("header");
   },[]);
 
   return (
