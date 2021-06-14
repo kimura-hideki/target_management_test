@@ -6,6 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { useLocation } from "react-router";
 
 const useStyles = makeStyles({
   root: {
@@ -49,10 +50,9 @@ const useStyles = makeStyles({
 // useStateは使わずにuseRefとuseReducerを使ってみます。
 const LoginForm = () => {
   const classes = useStyles();
-
+  const location = useLocation();
   // 各インプットコンポーネントはmmaterial-uiを使用
   return (
-
     <Card className={classes.root}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -82,7 +82,7 @@ const LoginForm = () => {
             color="secondary"
             className={classes.button}
             >
-                更新
+              {location.pathname.indexOf("new") !=-1 ? "登録" : "更新"}
             </Button>
         </CardActions>
       </form>
