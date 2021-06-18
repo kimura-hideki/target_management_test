@@ -12,8 +12,8 @@ const HeaderContents = () => {
   console.log("state");
   console.log(name);
   const history = useHistory();
+  const dispatch2 = useDispatch();
   if( name == "name" ){
-    const dispatch2 = useDispatch();
     dispatch2(clearAll());
     history.push('/');
   }

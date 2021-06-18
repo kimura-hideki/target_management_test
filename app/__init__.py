@@ -9,9 +9,10 @@ def create_app(test_config=None):
 
     with app.app_context():
         """ import parts """
-        from .views import login, memu
+        from .views import login, memu, item
         """ register Blueprints """
         app.register_blueprint(login.login_bp)
         app.register_blueprint(memu.menu_bp)
+        app.register_blueprint(item.item_bp)
         
     return app

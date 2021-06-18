@@ -6,7 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 
 const useStyles = makeStyles({
   root: {
@@ -51,6 +51,8 @@ const useStyles = makeStyles({
 const LoginForm = () => {
   const classes = useStyles();
   const location = useLocation();
+  const params = useParams();
+  console.log(params);
   // 各インプットコンポーネントはmmaterial-uiを使用
   return (
     <Card className={classes.root}>
@@ -59,7 +61,7 @@ const LoginForm = () => {
         </Typography>
       </CardContent>
       <form>
-      <TextField
+        <TextField
           id="standard-multiline-flexible"
           label="商品名"
           multiline
@@ -73,7 +75,7 @@ const LoginForm = () => {
           rowsMax={4}
           className={classes.textField}
         /><br/>
-        <img className={classes.image} width="400" height="400" src="/dist/images/noImageIcon.png" />
+        <img className={classes.textField} width="400" height="400" src="/dist/images/noImageIcon.png" />
         <CardActions className={classes.cardActions}>
             <Button
             size="large"

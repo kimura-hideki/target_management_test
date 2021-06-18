@@ -116,6 +116,7 @@ const LoginForm = () => {
       (response) => {
         // console.log(response);
         dispatch2(setName(response.data.result[0].user_name));
+        dispatch2(setUserID(response.data.result[0].user_id));
         // menu画面に遷移
         history.push('/menu');
       }

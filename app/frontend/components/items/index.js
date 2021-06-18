@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import store from "../stores/";
 import Header from "../header/";
-import ItemList from "./itemList"
+import ItemSearchForm from "./itemSearchForm"
 
 const Items = () => {
   useEffect(() => {
@@ -12,7 +12,7 @@ const Items = () => {
     return (
     <Provider store={store}>
       <Header />
-      <ItemList />
+      <ItemSearchForm />
     </Provider>
   );
 }
