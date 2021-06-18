@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer } from "react";
+import React, {useRef, useEffect, useReducer, useState } from "react";
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,15 +8,20 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from "react-router";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 import { useSelector } from "react-redux";
 import ItemList from "./itemList"
+import { setPrice, setName } from "../stores/item";
 
 const initialState  = {
   items: [],
   loading: false,
   fatal: false,
+  item_name: "",
+  price: "",
 };
+
 const reducer = (state, action) => {
   switch (action.type){
     case 'GET_ITEM_ALL':
@@ -64,15 +69,35 @@ const ItemSearchForm = () => {
   const [itemState, dispatch] = useReducer(reducer, initialState)
   const classes = useStyles();
 
+  const [value1, setValue1] = useState("");
+  const [value2, setValue2] = useState("");
+
+  const itemNameRef = useRef(null);
+  const priceRef = useRef(null);
+
   const history = useHistory();
   const new_render = () => {
     // 新規登録画面に遷移
     history.push('/items/new');
   }
 
+  const nameChange = (e) => {
+    if( e.target.value == "" ){
+      setValue1("");
+    }else{
+      setValue1(e.target.value);
+    }
+  };
+
+  const priceChange = (e) => {
+    if( e.target.value == "" ){
+      setValue2("");
+    }else{
+      setValue2(e.target.value);
+    }
+  };
+  const dispatch2 = useDispatch();
   const userID = useSelector(state => state.user.userID);
-  console.log("itemSearchForm")
-  console.log(userID)
 
   const getItemList = async () => {
     const url = '/api/items/all';
@@ -84,8 +109,6 @@ const ItemSearchForm = () => {
       }
     }).then(
       (response) => {
-        console.log("----------");
-        console.log(response.data.result);
         dispatch ({ type: 'GET_ITEM_ALL', payload: response.data.result})
       }
     ).catch(
@@ -96,11 +119,45 @@ const ItemSearchForm = () => {
     );
   }
   
+  const item_search = async () => {
+    const url = '/api/items/search';
+    dispatch({ type: 'LOADING' });
+
+    await axios.get(url, {
+      params:{
+        item_name: value1,
+        price: value2,
+      }
+    }).then(
+      (response) => {
+        // console.log(response);
+        dispatch ({ type: 'GET_ITEM_ALL', payload: response.data.result})
+        // menu画面に遷移
+        // history.push('/menu');
+      }
+    ).catch(
+      (error) => {
+        console.log("error");
+        console.log(error);
+        dispatch({ type: 'ERROR', error_message: error.response.data});
+        console.log(error.response.status);
+        console.log(error.response.data)
+      }
+    );
+  }
   // ランディング時にデータ取得
   useEffect(() => {
     console.log("getItemList");
     getItemList();
   }, [])
+
+  useEffect (() => {
+    console.log("item_name");
+  },[value1]);
+
+  useEffect (() => {
+    console.log("price");
+  },[value2]);
 
   // console.log(state);
   // 各インプットコンポーネントはmmaterial-uiを使用
@@ -118,6 +175,7 @@ const ItemSearchForm = () => {
           multiline
           rowsMax={4}
           className={classes.textField}
+          onChange={nameChange}
         />
         <TextField
           id="standard-multiline-flexible"
@@ -125,6 +183,7 @@ const ItemSearchForm = () => {
           multiline
           rowsMax={4}
           className={classes.textField}
+          onChange={priceChange}
         />
         <CardActions className={classes.rightArea}>
             <div>
@@ -146,6 +205,7 @@ const ItemSearchForm = () => {
           variant="contained" 
           color="secondary"
           className={classes.button}
+          onClick={() => item_search()}
           >
             検索
           </Button>

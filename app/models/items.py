@@ -1,6 +1,7 @@
 from flask import jsonify
 from flask.globals import session
 from sqlalchemy import Column, String, Integer
+from sqlalchemy.sql.expression import null
 from settings import Base, session
 
 from cerberus import Validator
@@ -78,7 +79,17 @@ class ItemsSchema(ma.SQLAlchemyAutoSchema):
         model = Item
 
 def get_items_data(params):
-    result = session.query(Item).filter(Item.user_id == params).all()
+    query = session.query(Item)
+    if "user_id" in params and params["user_id"] != "":
+        query = query.filter(Item.user_id == params["user_id"])
+
+    if "item_name" in params and params["item_name"] != "":
+        query = query.filter(Item.item_name == params["item_name"])
+
+    if "price" in params and params["price"] != "":
+        query = query.filter(Item.price == params["price"])
+
+    result = query.all()
     ItemsSchema_schema = ItemsSchema(many=True)
 
     try:

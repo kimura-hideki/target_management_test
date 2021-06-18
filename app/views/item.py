@@ -11,7 +11,13 @@ item_bp = Blueprint(
 
 @item_bp.route("/api/items/all", methods=["GET"])
 def get_items():
-    params = request.args.get('userId')
-    print("****")
-    print(request.args)
+    params = {"user_id":""}
+    params["user_id"] = request.args.get('userId')
+    return get_items_data(params)
+
+@item_bp.route("/api/items/search", methods=["GET"])
+def search():
+    params = {"item_name":"", "price":""}
+    params["item_name"] = request.args.get('item_name')
+    params["price"] = request.args.get('price')
     return get_items_data(params)
