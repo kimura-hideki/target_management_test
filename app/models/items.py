@@ -88,7 +88,6 @@ def get_items_data(params):
 
     if "price" in params and params["price"] != "":
         query = query.filter(Item.price == params["price"])
-
     result = query.all()
     ItemsSchema_schema = ItemsSchema(many=True)
 

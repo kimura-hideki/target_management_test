@@ -51,6 +51,8 @@ const ItemList = (props) => {
   
   // console.log(state);
   // 各インプットコンポーネントはmmaterial-uiを使用
+  if (itemsList.length === 0)
+    return <div>結果なし</div>
   return (
     <div>
     <List component="nav" aria-label="secondary mailbox folders" className={classes.listForm}>

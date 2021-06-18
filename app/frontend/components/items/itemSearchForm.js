@@ -137,11 +137,7 @@ const ItemSearchForm = () => {
       }
     ).catch(
       (error) => {
-        console.log("error");
-        console.log(error);
-        dispatch({ type: 'ERROR', error_message: error.response.data});
-        console.log(error.response.status);
-        console.log(error.response.data)
+        dispatch ({ type: 'GET_ITEM_ALL', payload: []})
       }
     );
   }
